@@ -1,0 +1,15 @@
+node_modules/
+build/
+dist/
+logs/
+coverage/
+.github/
+.vscode/
+.env
+.env.*
+Dockerfile
+.dockerignore
+.gitignore
+tests/
+package-lock.json
+DB_STORE
