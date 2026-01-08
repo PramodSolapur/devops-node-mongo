@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const teaSchema = new mongoose.Schema(
   {
@@ -11,9 +11,9 @@ const teaSchema = new mongoose.Schema(
       default: 10,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
-const Tea = mongoose.model("Tea", teaSchema);
+const Tea = mongoose.model('Tea', teaSchema);
 
 export default Tea;
