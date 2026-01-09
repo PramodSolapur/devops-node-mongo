@@ -16,6 +16,7 @@ jobs:
               uses: actions/setup-node@v5
               with:
                 node-version: "24.x"
+                cache: "npm"
 
             - name: Install node packages
               run: npm ci
@@ -58,6 +59,7 @@ jobs:
           - name: Docker push image
             run: |
               docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
+              docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:latest
 
     deploy-app-to-ec2:
         runs-on: ubuntu-latest
@@ -77,5 +79,7 @@ jobs:
                 sudo docker rm node-mongo-app || true
 
                 sudo docker run -d --restart=always -p 9000:9000 -e PORT=${{ secrets.PORT }} -e MONGODB_URI=${{ secrets.MONGODB_URI }} --name node-mongo-app ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
-          
+
+                echo "Cleaning unused Docker images"
+                sudo docker image prune -af || true
           

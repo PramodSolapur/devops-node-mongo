@@ -22,6 +22,10 @@ COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/package.json ./package.json
 COPY --from=builder /app/src ./src
 
+HEALTHCHECK --interval=30s --timeout=5s \
+  CMD curl -f http://localhost:9000/health || exit 1
+
+
 USER nodeuser
 
 EXPOSE 9000
