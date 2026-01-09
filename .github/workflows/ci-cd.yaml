@@ -35,4 +35,4 @@ jobs:
         steps:
           - name: Build docker image
             run: |
-              docker build --pull -t ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
+              docker build --pull -t ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }} .
