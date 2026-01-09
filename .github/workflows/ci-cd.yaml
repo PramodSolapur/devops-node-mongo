@@ -71,5 +71,11 @@ jobs:
               key: ${{ secrets.EC2_SSH_KEY }}
               script: |
                 echo "EC2 instance connected"
+                docker pull ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
+
+                docker stop node-mongo-app || true
+                docker rm node-mongo-app || true
+                
+                docker run -d --rm --restart=always -p 9000:9000 -e PORT=${{ secrets.PORT }} -e MONGODB_URI=${{ secrets.MONGODB_URI }} --name node-mongo-app ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
           
           
