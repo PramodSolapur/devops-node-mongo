@@ -64,11 +64,11 @@ jobs:
         needs: build-scan-push-docker-image
         steps:
           - name: SSH into ec2 instance
-            uses: appleboy/ssh-action@v0.1.7
+            uses: appleboy/ssh-action@v1.0.3
             with:
               host: ${{ secrets.EC2_HOST }}
               username: ${{ secrets.EC2_USER }}
-              key: ${{ secrets.EC2.SSH_KEY }}
+              key: ${{ secrets.EC2_SSH_KEY }}
               script: |
                 echo "EC2 instance connected"
           
