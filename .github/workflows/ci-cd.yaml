@@ -64,7 +64,7 @@ jobs:
         needs: build-scan-push-docker-image
         steps:
           - name: SSH into ec2 instance
-            uses: appleboy/ssh-action@0.1.7
+            uses: appleboy/ssh-action@v0.1.7
             with:
               host: ${{ secrets.EC2_HOST }}
               username: ${{ secrets.EC2_USER }}
