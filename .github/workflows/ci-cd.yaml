@@ -22,3 +22,11 @@ jobs:
 
             - name: Scan installed node packages
               run: npm audit --audit-level=high
+    
+    build-docker-image:
+        runs-on: ubuntu-latest
+        needs: build-scan-audit
+        steps:
+          - name: Build docker image
+            run: |
+              docker build --pull -t ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
