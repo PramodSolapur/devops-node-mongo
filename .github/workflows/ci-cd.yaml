@@ -46,4 +46,6 @@ jobs:
               image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
               severity: CRITICAL,HIGH
               exit-code: 1
+              scanners: vuln
+              vuln-type: os,library
           
