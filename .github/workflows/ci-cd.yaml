@@ -29,7 +29,7 @@ jobs:
             - name: Format the application
               run: npm run format:check
 
-    build-docker-image:
+    build-scan-docker-image:
         runs-on: ubuntu-latest
         needs: build-scan-audit
         steps:
@@ -39,14 +39,11 @@ jobs:
           - name: Build docker image
             run: |
               docker build --pull -t ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }} .
-              
-    scan-docker-image:
-        runs-on: ubuntu-latest
-        needs: build-docker-image
-        steps:
+
           - name: Scan docker image
             uses: aquasecurity/trivy-action@0.22.0
             with:
               image-ref: ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
               severity: CRITICAL,HIGH
               exit-code: 1
+          
