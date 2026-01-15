@@ -82,9 +82,9 @@ jobs:
                 docker stop node-mongo-app1 node-mongo-app2 || true
                 docker rm node-mongo-app1 node-mongo-app2 || true
 
-                docker run -d --restart=always -p 9001:9000 -e PORT=${{ secrets.PORT }} -e MONGODB_URI=${{ secrets.MONGODB_URI }} --name node-mongo-app1 ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
+                docker run -d --restart=always -p 9001:9000 -e PORT=${{ secrets.PORT }} -e SERVER_ID=server-1 -e MONGODB_URI=${{ secrets.MONGODB_URI }} --name node-mongo-app1 ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
 
-                docker run -d --restart=always -p 9002:9000 -e PORT=${{ secrets.PORT }} -e MONGODB_URI=${{ secrets.MONGODB_URI }} --name node-mongo-app2 ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
+                docker run -d --restart=always -p 9002:9000 -e PORT=${{ secrets.PORT }} -e SERVER_ID=server-2 -e MONGODB_URI=${{ secrets.MONGODB_URI }} --name node-mongo-app2 ${{ secrets.DOCKERHUB_USERNAME }}/node-mongo-secure-img:${{ github.sha }}
 
                 echo "Cleaning unused Docker images"
                 docker image prune -af || true
