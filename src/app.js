@@ -10,7 +10,7 @@ app.use(express.json({ limit: '10kb' }));
 app.get('/', (req, res) => {
   res
     .status(200)
-    .json({ status: 'success', message: 'Welcome to Devops Course!' });
+    .json({ status: 'success', message: 'Welcome to Devops Course!', serverId: process.env.SERVER_ID });
 });
 
 app.get('/health', (req, res) => {
